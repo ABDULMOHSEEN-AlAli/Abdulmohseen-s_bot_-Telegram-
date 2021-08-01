@@ -2,6 +2,10 @@
 from telegram.ext import *
 import Responses as responses
 from time import sleep
+from urllib import request
+import json
+
+
 
 # Take the TAKEN from a hidden file
 hidden_file = open("TAKEN.txt", "r")
@@ -34,12 +38,14 @@ def commands_command(update, context):
                               "and also you can ask me who is me")
 
 
+
 # This is for handle the message from user and try to talk with him
 def handle_message(update, context):
     text = str(update.message.text).lower()
     response = responses.sample_responses(text)
 
     update.message.reply_text(response)
+
 
 
 # this is for any error that happen
@@ -58,6 +64,7 @@ def main():
     dispatcher.add_handler(CommandHandler("start", start_command))
     dispatcher.add_handler(CommandHandler("help", help_command))
     dispatcher.add_handler(CommandHandler("commands", commands_command))
+
     dispatcher.add_handler(MessageHandler(Filters.text, handle_message))
 
     dispatcher.add_error_handler(error)
