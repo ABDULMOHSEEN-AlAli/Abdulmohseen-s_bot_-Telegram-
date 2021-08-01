@@ -23,5 +23,11 @@ def sample_responses(input_text):
             data_time = now.strftime("%d/%m/%y, %H:%M:%S")
             return str(data_time)
 
+    help_word = ("help","heelp")
+    for word in help_word:
+        if word in user_message:
+            return "If you need help you have to write \n(/help)"
+
+
     else:
         return "Hah? English please"
