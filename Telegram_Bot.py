@@ -6,7 +6,6 @@ from urllib import request
 import json
 
 
-
 # Take the TAKEN from a hidden file
 hidden_file = open("TAKEN.txt", "r")
 TAKEN = hidden_file.readline()
@@ -25,6 +24,7 @@ def start_command(update, context):
 # This function is for ask for help
 def help_command(update, context):
     update.message.reply_text("You need help? Do you think that I am a google?!")
+
 
 
 
@@ -50,7 +50,10 @@ def handle_message(update, context):
 
 # this is for any error that happen
 def error(update, context):
-    print(f"Update {update} caused error {context.error}\n")
+    # open the error file
+    text = f"Update {update} caused error {context.error}\n"
+    print(text)
+    # write the error in the file
 
 
 # main function to turn on the bot
@@ -66,12 +69,10 @@ def main():
     dispatcher.add_handler(CommandHandler("commands", commands_command))
 
     dispatcher.add_handler(MessageHandler(Filters.text, handle_message))
-
     dispatcher.add_error_handler(error)
-
     # make the bot polling
     updater.start_polling()
-
+    #updater.idle()
 
 # print this if the bot is setup
 print("Data is ready")
